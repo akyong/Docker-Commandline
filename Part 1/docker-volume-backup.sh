@@ -6,9 +6,7 @@ docker container stop mongovolume
   /Users/bobbyakyong/programming/java/springboot/Docker Guide Sample/backup
 
   #create a new container with
-  docker container create --name nginxbackup
-  --mount "type=bind,source=/Users/bobbyakyong/programming/java/springboot/Docker Guide Sample/backup,destination=/backup"
-  --mount "type=volume,source=mongodata,destination=/data" nginx:latest
+  docker container create --name nginxbackup --mount "type=bind,source=/Users/bobbyakyong/programming/java/springboot/Docker Guide Sample/backup,destination=/backup" --mount "type=volume,source=mongodata,destination=/data" nginx:latest
 
   docker container start nginxbackup
 
