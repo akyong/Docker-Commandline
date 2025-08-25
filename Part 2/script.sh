@@ -1,4 +1,5 @@
 
+#FROM Instruction
 docker build -t bobbyakyong/from from
 
 #bobbyakyong@192 Part 2 % docker build -t bobbyakyong/from from
@@ -32,4 +33,69 @@ docker image ls
 #---------------------------
 
 #RUN Instruction
-# Run instruction, this proses will execute in image when at build stage. So when we try to build an image, on the pros
+# Run instruction, this proses will execute in image when at build stage.
+
+docker build -t bobbyakyong/run run
+#try to add --progress=plain in order to read the progress more detail
+# --no-cache to disable build image from cache
+
+#COMMAND / CMD Instruction
+#cmd run only when docker container is running.
+#for example
+# CMD command param param
+# CMD ["executeable", "param","param"]
+docker build -t bobbyakyong/command command
+
+#for see log from image container
+docker image inspect bobbyakyong/command
+
+#let's test it out
+docker container create --name command bobbyakyong/command
+docker container logs command
+
+#Label Instruction Format
+#LABEL <key>=<value>
+#LABEL <key1>=<value1> <key2>=<value2>
+#use for additional informmation
+docker build -t bobbyakyong/label label
+
+#for see log from image container
+docker image inspect bobbyakyong/label
+
+#let's test it out
+docker container create --name command bobbyakyong/command
+
+docker container logs command
+
+#ADD INSTRUCTION
+#for example
+#ADD source destionation
+#ADD world.txt hello
+#its mean copy file world.txt to folder hello
+
+docker build -t bobbyakyong/add add
+#let's test it out
+
+docker container create --name add bobbyakyong/add
+
+docker container start add
+
+docker container logs add
+
+#COPY Instruction
+#different between copy and add
+#add is able to detect command, for example if the file is not exist,
+#it will download file automatically or if the file is a gzip or tar.gz file, it will extract automatically
+#but COPY, it's only copy file. it's a duplicator.
+
+docker build -t bobbyakyong/copy copy
+
+docker container create --name copy bobbyakyong/copy
+
+docker container start copy
+
+docker container logs copy
+
+#DOCKERIGNORE FILE
+# .dockerignore, it's something like .gitignore
+
